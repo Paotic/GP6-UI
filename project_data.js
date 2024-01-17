@@ -207,3 +207,59 @@ document.getElementById('fileUploadForm').addEventListener('submit', function(ev
         // Handle errors here
     });
 });
+
+function searchProjects() {
+    // Variables to hold your HTML elements
+    var input, filter, table, tr, tdProject, tdModel, i;
+    
+    // Get the search input value
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    
+    // Get the table and its rows
+    table = document.getElementById("project_data");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those that don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        tdProject = tr[i].getElementsByTagName("td")[0]; // The Project Name column
+        tdModel = tr[i].getElementsByTagName("td")[1]; // The Model Name column
+        
+        // If the row contains a Project or Model Name
+        if (tdProject || tdModel) {
+            if (tdProject.innerHTML.toUpperCase().indexOf(filter) > -1 || tdModel.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = ""; // This row matches the search, so show it
+            } else {
+                tr[i].style.display = "none"; // This row doesn't match the search, so hide it
+            }
+        }       
+    }
+}
+
+function searchModels() {
+    // Variables to hold your HTML elements
+    var input, filter, table, tr, tdProject, tdModel, i;
+    
+    // Get the search input value
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    
+    // Get the table and its rows
+    table = document.getElementById("project_data");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those that don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        tdProject = tr[i].getElementsByTagName("td")[0]; // The Project Name column
+        tdModel = tr[i].getElementsByTagName("td")[1]; // The Model Name column
+        
+        // If the row contains a Project or Model Name
+        if (tdProject || tdModel) {
+            if (tdProject.innerHTML.toUpperCase().indexOf(filter) > -1 || tdModel.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = ""; // This row matches the search, so show it
+            } else {
+                tr[i].style.display = "none"; // This row doesn't match the search, so hide it
+            }
+        }       
+    }
+}
