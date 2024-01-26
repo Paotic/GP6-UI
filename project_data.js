@@ -1,15 +1,16 @@
-var projectAPI = 'http://localhost:3000/Project';
-var projectDataAPI = 'http://localhost:3000/Data';
+var projectAPI = 'http://localhost:3000/';
 
 function start(){
     getProject(renderProject);
     getProjectData(renderProjectData);
+    getProjectModel(renderProjectModel);
+    // getProjectModel(renderProjectModel2);
     handleFormProject();
 }
 start();
 
 function getProject(callback){
-    fetch(projectAPI)
+    fetch(projectAPI + 'Project')
     .then(function(response){
         return response.json();
     })
@@ -17,7 +18,15 @@ function getProject(callback){
 }
 
 function getProjectData(callback){
-    fetch(projectDataAPI)
+    fetch(projectAPI + 'Data')
+    .then(function(response){
+        return response.json();
+    })
+    .then(callback);
+}
+
+function getProjectModel(callback){
+    fetch(projectAPI + 'Model')
     .then(function(response){
         return response.json();
     })
@@ -25,7 +34,7 @@ function getProjectData(callback){
 }
 
 function handleDeleteProject(id){
-    fetch(projectAPI + '/' + id, {
+    fetch(projectAPI + 'Project' + '/' + id, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -42,21 +51,42 @@ function handleDeleteProject(id){
     });
 }
 
-// function createProject(data){
-//     fetch(projectAPI, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     })
-//     .then(function(response){
-//         return response.json();
-//     })
-//     .then(function(){
-//         location.href = 'Project2.html';
-//     });
-// }
+
+function handleDeleteData(id){
+    fetch(projectAPI + 'Data' + '/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(){
+        var projectItem = document.querySelector('.data-item-' + id);
+        if (projectItem){
+            projectItem.remove();
+        }
+    });
+}
+
+function handleDeleteModel(id){
+    fetch(projectAPI + 'Model' + '/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(){
+        var projectItem = document.querySelector('.Model-' + id);
+        if (projectItem){
+            projectItem.remove();
+        }
+    });
+}
 
 function createProject(data) {
     fetch(projectAPI, {
@@ -82,8 +112,6 @@ function createProject(data) {
     });
 }
 
-
-
 function renderProject(Project){
     var ProjectDataBl = document.querySelector('#project_data');
     var htmls = Project.map(function(Projects){
@@ -102,29 +130,73 @@ function renderProject(Project){
     ProjectDataBl.innerHTML =  htmls.join('');   
 }
 
-function handleDetail(projectId){
-    window.location.href = 'Project_detail.html?projectId=' + projectId;
+function renderProjectModel(Model){
+    var ProjectModelBl = document.querySelector('#Select');
+    var htmls = Model.map(function(Models){
+        return `
+        <option class="Model-${Models.id}" value="${Models.id}">${Models.name}</option>
+        `;
+    }); 
+    ProjectModelBl.innerHTML =  htmls.join(''); 
+    
+    var ProjectModel = document.querySelector('#project_model');
+    var html2 = Model.map(function(Models){
+        return `
+        <tr class="Model-${Models.id}">
+            <td>${Models.id}</td>
+            <td></td>
+            <td>${Models.name}</td>
+            <td>${Models.description}</td>
+            <td>
+                <button class="btn btn-primary" type="button" onclick="handleDeleteModel(${Models.id})">Delete</button>
+            </td>
+        </tr>
+        `;
+    });
+    ProjectModel.innerHTML =  html2.join(''); 
 }
-function handleUpdateDetail(projectId){
-    window.location.href = 'Update_project.html?projectId=' + projectId;
-}
+
+// function renderProjectModel2(Model){
+//     var ProjectModel = document.querySelector('#project_model');
+//     var html2 = Model.map(function(Models){
+//         return `
+//         <tr class="Model-${Models.id}">
+//             <td>${Models.id}</td>
+//             <td></td>
+//             <td>${Models.name}</td>
+//             <td>${Models.description}</td>
+//             <td>
+//                 <button class="btn btn-primary" type="button" onclick="handleDeleteModel(${Models.id})">Delete</button>
+//             </td>
+//         </tr>
+//         `;
+//     });
+//     ProjectModel.innerHTML = html2.join(''); 
+// }
 
 function renderProjectData(Data){
     var ProjectDataDetailBl = document.querySelector('#project_data_detail');
     var html1 = Data.map(function(Datas){
         return `
-        <tr class="project-item-${Datas.id}">
+        <tr class="data-item-${Datas.id}">
             <td>${Datas.id}</td>
             <td>${Datas.data}</td>
             <td>${Datas.predicted}</td>
             <td class="btn">
                 <button class="btn btn-primary" type="button" onclick="">Update</button>
-                <button class="btn btn-primary" type="button" onclick="handleDeleteProject(${Datas.id})">Delete</button>
+                <button class="btn btn-primary" type="button" onclick="handleDeleteData(${Datas.id})">Delete</button>
             </td>
         </tr>
         `
     });
     ProjectDataDetailBl.innerHTML = html1.join('');  
+}
+
+function handleDetail(projectId){
+    window.location.href = 'Project_detail.html?projectId=' + projectId;
+}
+function handleUpdateDetail(projectId){
+    window.location.href = 'Update_project.html?projectId=' + projectId;
 }
 
 function handleFormProject(){

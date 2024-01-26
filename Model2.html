@@ -1,10 +1,3 @@
-<?php 
-session_start();
-if(!isset($_SESSION['user'])){
-    header("Location: login.html");
-}
-?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,8 +26,6 @@ if(!isset($_SESSION['user'])){
                 <div class="navbar-nav">
                   <a class="nav-link active" aria-current="page" href="Model2.html">Model</a>
                   <a class="nav-link" href="Project2.html">Project</a>
-                  <!-- <a class="nav-link" href="#">Pricing</a>
-                  <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
                 </div>
               </div>
               <div class="user">
@@ -45,7 +36,6 @@ if(!isset($_SESSION['user'])){
             </div>
             </div>
         </nav>
-
         <form>
           <div class="input-group">
           <input type="text" class="form-control" id="searchBar" placeholder="Search" aria-label="Search">
@@ -82,23 +72,6 @@ if(!isset($_SESSION['user'])){
             </div>
         </div>
         </form>
-        
-        <!-- <form>
-            <div class="mb-3">
-                <label for="" class="form-label">Model Name</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label for="" class="form-label">Description</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="input-group mb-3">
-                <label for="" class="form-label">Model Data</label><br>
-                <input type="file" class="form-control">
-                <label class="input-group-text" for="">Upload</label>
-              </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form> -->
         <table class="table">
             <thead>
               <tr>
@@ -109,32 +82,12 @@ if(!isset($_SESSION['user'])){
                 <th></th>
               </tr>
             </thead>
-            <tbody>
-            <?php   
-                        $mysqli = require __DIR__ . "/database.html";
-                        $sql = "SELECT * FROM model_data";
-                        $result = mysqli_query($mysqli, $sql);
-
-                        while ($row = mysqli_fetch_array($result)){
-                            ?>
-                            <tr>
-                                <td><?php echo $row['ID'] ?></td>
-                                <td><?php echo $row['user_name'] ?></td>
-                                <td><?php echo $row['model'] ?></td>
-                                <td><?php echo $row['model_description'] ?></td>
-                                <td class="btn_end">
-                                    <a href="edit.html?sid=<?php echo $row['ID'] ?>" class="btn myBtn" id="myBtn">Edit</a>
-                                    <a onclick="return confirm('Are you sure deleting this model?')" href="delete.html?sid=<?php echo $row['ID'] ?>" class="btn">Delete</a>        
-                                </td>
-                            </tr>
-                        
-                            <?php
-                        }
-                        ?>
-                    </tbody>
+            <tbody id="project_model">
+              
             </tbody>
           </table>
 
+        <script src="project_data.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </body>
 </html>
