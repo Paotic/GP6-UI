@@ -32,5 +32,14 @@ form{
 a{
     justify-self: right;
 }
+table{
+    border-collapse: collapse;
+}
+.button {
+    text-align: right;
+    margin-left: 5px;
+}
+  
+
 
 

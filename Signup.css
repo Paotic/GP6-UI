@@ -117,3 +117,9 @@ body{
 .login-link p a:hover{
     text-decoration: underline;
 }
+.error-messager-all{
+    font-size: .85rem;
+    color: red;
+    text-align: center;
+    display: none;
+}

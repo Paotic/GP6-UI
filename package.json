@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "project_data.js",
+  "proxy": "http://localhost:8080/",
   "scripts": {
     "start": "json-server --watch db.json",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "json-server": "^0.17.4"
+    "json-server": "^0.17.4",
+    "vanilla-javascript": "^1.1.1"
   }
 }

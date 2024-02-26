@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="with=device-width, initial-scale = 1.0">
+        <meta name="viewport" content="width=device-width, initial-scale = 1.0">
         <title>GP6</title>
         <link rel="stylesheet" href="Dash_board.css">
         <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"> -->
@@ -32,51 +32,50 @@
                 <div class="name">
                     <h5></h5>
                 </div>
-                <a href="logout.html"><i class="bi bi-box-arrow-right"></i></a>
+                <a onclick="logoutUser()"><i class="bi bi-box-arrow-right"></i></a>
             </div>
             </div>
         </nav>
         <form>
           <div class="input-group">
-          <input type="text" class="form-control" id="searchBar" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-secondary" type="button">Search</button>
-          <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">New</button>
-      </div>
+            <input type="text" class="form-control" id="searchInput" placeholder="Search" onkeyup="searchModels()" aria-label="Search">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">New</button>
+          </div>
          <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">New Model</h1>
-                </div>
-                <div class="modal-body">
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">New Model</h1>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="" class="form-label">Model Name</label>
+                      <input type="text" class="form-control">
+                  </div>
                   <div class="mb-3">
-                    <label for="" class="form-label">Model Name</label>
+                    <label for="" class="form-label">Description</label>
                     <input type="text" class="form-control">
-                </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">Description</label>
-                  <input type="text" class="form-control">
-                </div>
-                <div class="input-group mb-3">
-                  <label for="" class="form-label">Model Data</label>
-                  <input type="file" class="form-control">
-                  <label class="input-group-text" for="">Upload</label>
-                </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-                </div>
-            </div>
-            </div>
-        </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <label for="" class="form-label">Model Data</label>
+                    <input type="file" class="form-control">
+                    <label class="input-group-text" for="">Upload</label>
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                  </div>
+              </div>
+              </div>
+          </div>
         </form>
-        <table class="table">
-            <thead>
+        <table class="table table-hover">
+            <thead class="thead-dark">
               <tr>
                 <th scope="col">Model ID</th>
-                <th scope="col">Author</th>
                 <th scope="col">Model Name</th>
                 <th scope="col">Description</th>
                 <th></th>
